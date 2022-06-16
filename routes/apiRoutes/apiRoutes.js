@@ -5,13 +5,13 @@ const uniqid = require('uniqid')
 let db = require("../../db/db.json");
 
 // GET request for notes
-app.get('/api/notes', (req, res) => {
+router.get('/api/notes', (req, res) => {
   db = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
   res.json(db);
 });
 
 // POST request for notes
-app.post('/api/notes', (req, res) => {
+router.post('/api/notes', (req, res) => {
   let note = {
     title: req.body.title,
     text: req.body.text,
@@ -20,6 +20,7 @@ app.post('/api/notes', (req, res) => {
   database.push(note);
   fs.writeFileSync("./db/db.json", JSON.stringify(database));
   res.json(database); 
-  });
+});
+
 
 module.exports = router;
