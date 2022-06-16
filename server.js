@@ -2,7 +2,7 @@ const express = require('express');
 
 const noteData = require('./db/db.json');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.get('/api/notes', (req, res) => res.json(noteData));
 app.post('/api/notes', (req, res) => {
   
   const { title, text } = req.body;
-    
+
   if (title && text) {
       
     const newNote = {
@@ -47,5 +47,5 @@ app.post('/api/notes', (req, res) => {
 });
 
 app.listen(PORT, () =>
-  console.log(`Example app listening at http://localhost:${PORT}`)
+  console.log(`Note Taker app listening at http://localhost:${PORT}`)
 );
