@@ -4,13 +4,13 @@ const uniqid = require('uniqid')
 let db = require("../../db/db.json");
 
 // GET request for notes
-router.get('/api/notes', (req, res) => {
+router.get('/notes', (req, res) => {
   db = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
   res.json(db);
 });
 
 // POST request for notes
-router.post('/api/notes', (req, res) => {
+router.post('/notes', (req, res) => {
   let note = {
     title: req.body.title,
     text: req.body.text,
