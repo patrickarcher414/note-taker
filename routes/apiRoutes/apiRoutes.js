@@ -1,28 +1,25 @@
+const router = require("express").Router();
+const fs = require("fs");
+const path = require("path");
+const uniqid = require('uniqid')
+let db = require("../../db/db.json");
+
 // GET request for notes
-app.get('/api/notes', (req, res) => res.json(noteData));
+app.get('/api/notes', (req, res) => {
+  db = JSON.parse(fs.readFileSync("./db/db.json", "UTF-8"));
+  res.json(db);
+});
 
 // POST request for notes
 app.post('/api/notes', (req, res) => {
-  
-  const { title, text } = req.body;
-
-  if (title && text) {
-      
-    const newNote = {
-      title,
-      text,
-      note_id: uniqid()
-    };
-  
-    const response = {
-      status: 'success',
-      body: newNote,
-    };
-  
-    res.json(response);
-  } else {
-    res.json('Error in posting note');
-  }
-});
+  let note = {
+    title: req.body.title,
+    text: req.body.text,
+    note_id: uniqid(),
+  };
+  database.push(note);
+  fs.writeFileSync("./db/db.json", JSON.stringify(database));
+  res.json(database); 
+  });
 
 module.exports = router;
