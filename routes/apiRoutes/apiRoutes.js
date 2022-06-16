@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const fs = require("fs");
-const path = require("path");
 const uniqid = require('uniqid')
 let db = require("../../db/db.json");
 
@@ -17,9 +16,9 @@ router.post('/api/notes', (req, res) => {
     text: req.body.text,
     note_id: uniqid(),
   };
-  database.push(note);
-  fs.writeFileSync("./db/db.json", JSON.stringify(database));
-  res.json(database); 
+  db.push(note);
+  fs.writeFileSync("./db/db.json", JSON.stringify(db));
+  res.json(db); 
 });
 
 
